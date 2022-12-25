@@ -1,27 +1,31 @@
-import { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
-import ReplaceImage from '../../assets/images/unknown.png';
-import MovieList from '../../pages/components/MovieList/MovieList';
-import { flexCenter } from '../../styles/common';
+import { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+import ReplaceImage from "../../assets/images/unknown.png";
+import { flexCenter } from "../../styles/common";
 
 function MovieCard({ movie }) {
     const IMAGE_URL = useRef(process.env.REACT_APP_IMAGE_URL);
-    const [movieOverView, setMovieOverView] = useState('');
+    const [movieOverView, setMovieOverView] = useState("");
 
     useEffect(() => {
         if (!movie) return;
         if (movie.overview.length > 100) {
-            setMovieOverView(movie.overview.slice(0, 100) + '...');
+            setMovieOverView(movie.overview.slice(0, 100) + "...");
         } else {
             setMovieOverView(movieOverView);
         }
-    }, [movie]);
+    }, [movie, movieOverView]);
 
     return (
         <S.Wrapper>
             <S.Poster>
                 <img
-                    src={movie.poster_path ? IMAGE_URL.current + movie.poster_path : ReplaceImage}
+                    src={
+                        movie.poster_path
+                            ? IMAGE_URL.current + movie.poster_path
+                            : ReplaceImage
+                    }
+                    alt={"card"}
                 />
             </S.Poster>
             <S.DescBox>

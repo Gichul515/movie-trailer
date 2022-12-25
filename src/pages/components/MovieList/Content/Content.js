@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import MovieCard from '../../../../components/Card/Card';
-import usePopularMovieQuery from '../../../../queries/usePopularMovieQurey';
-import { useInView } from 'react-intersection-observer';
+import React, { useEffect } from "react";
+import styled from "styled-components";
+import MovieCard from "../../../../components/Card/Card";
+import usePopularMovieQuery from "../../../../queries/usePopularMovieQurey";
+import { useInView } from "react-intersection-observer";
 
 function MovieListContent() {
-    const { data: movieList, fetchNextPage, isFetching } = usePopularMovieQuery();
+    const {
+        data: movieList,
+        fetchNextPage,
+        isFetching,
+    } = usePopularMovieQuery();
     const [ref, inView] = useInView();
     // ref = useRef // html 요소 선택
     // inView // 감지 됨에 따라 변화되는 옵션 값
@@ -13,7 +17,7 @@ function MovieListContent() {
     useEffect(() => {
         if (!inView || isFetching) return;
         fetchNextPage();
-    }, [inView]);
+    }, [inView, fetchNextPage, isFetching]);
 
     // reqct-qurey 안썼을 때
     /* 
